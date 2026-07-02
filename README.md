@@ -1,39 +1,28 @@
-> **Stage :** Implémentation d’un SIEM avec Wazuh
 # **Wazuh**
 [![Bash](https://img.shields.io/badge/Bash-5.x-blue?style=for-the-badge&logo=gnubash&logoColor=white)]()
-
-
 **Wazuh** est une plateforme open-source offrant des capacités de détection des menaces, de surveillance de l'intégrité des fichiers, d'analyse des journaux et de réponse aux incidents.
-
 ## **Fonctionnalités**
-
 - Détection des intrusions
 - Surveillance des fichiers et logs
 - Gestion des agents
 - Alertes en temps réel
-
 ---
 > **Important :** Avant de procéder à l'installation, veuillez vérifier les prérequis matériels et le système d'exploitation, notamment pour l'intégration de Wazuh : https://documentation.wazuh.com/current/quickstart.html#requirements
 ## **Clonage**
-
 ####
 ```bash
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install git -y
 ```
-
 #### Clonez le dépôt
 ```bash
 sudo git clone https://github.com/ettaldi/Wazuh
 ```
-
 #### Entrez dans le répertoire
 ```bash
 cd Wazuh
 ```
-
 ## **Installation Wazuh server**
-
 ```bash
 sudo chmod +x wazuh_server.sh
 sudo ./wazuh_server.sh
@@ -48,34 +37,31 @@ sudo systemctl restart wazuh-manager
 > Télécharge le paquet RPM du Wazuh agent pour architecture x86_64.
 ####
 ```bash
-curl -o wazuh-agent-4.11.2-1.x86_64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.11.2-1.x86_64.rpm && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' rpm -ihv wazuh-agent-4.11.2-1.x86_64.rpm
+curl -o wazuh-agent-4.14.5-1.x86_64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.14.5-1.x86_64.rpm && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' rpm -ihv wazuh-agent-4.14.5-1.x86_64.rpm
 sudo systemctl enable wazuh-agent
 sudo systemctl restart wazuh-agent
 ```
-
 #### **DEB amd64**
 > Télécharge le paquet DEB pour architecture amd64.
 ####
 ```bash
-wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.11.2-1_amd64.deb && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' dpkg -i ./wazuh-agent_4.11.2-1_amd64.deb
+wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.5-1_amd64.deb && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' dpkg -i ./wazuh-agent_4.14.5-1_amd64.deb
 sudo systemctl enable wazuh-agent
 sudo systemctl restart wazuh-agent
 ```
-
 #### **RPM aarch64**
 > Pareil que le RPM amd64, mais pour architecture ARM64.
 ####
 ```bash
-curl -o wazuh-agent-4.11.2-1.aarch64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.11.2-1.aarch64.rpm && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' rpm -ihv wazuh-agent-4.11.2-1.aarch64.rpm
+curl -o wazuh-agent-4.14.5-1.aarch64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.14.5-1.aarch64.rpm && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' rpm -ihv wazuh-agent-4.14.5-1.aarch64.rpm
 sudo systemctl enable wazuh-agent
 sudo systemctl restart wazuh-agent
 ```
-
 #### **DEB aarch64**
 > Pour les machines ARM64.
 ####
 ```bash
-wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.11.2-1_arm64.deb && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' dpkg -i ./wazuh-agent_4.11.2-1_arm64.deb
+wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.5-1_arm64.deb && sudo WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent' dpkg -i ./wazuh-agent_4.14.5-1_arm64.deb
 sudo systemctl enable wazuh-agent
 sudo systemctl restart wazuh-agent
 ```
@@ -83,7 +69,7 @@ sudo systemctl restart wazuh-agent
 > Pour les machines Windows.
 ####
 ```bash
-Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.11.2-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent'
+Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.5-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='Addresse_IP' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='Nom_agent'
 NET START WazuhSvc
 ```
 ### **macOS**
@@ -91,14 +77,14 @@ NET START WazuhSvc
 > Télécharge le paquet d’installation pour Mac Intel.
 ####
 ```bash
-curl -so wazuh-agent.pkg https://packages.wazuh.com/4.x/macos/wazuh-agent-4.11.2-1.intel64.pkg && echo "WAZUH_MANAGER='Addresse_IP' && WAZUH_AGENT_GROUP='default' && WAZUH_AGENT_NAME='Nom_agent'" > /tmp/wazuh_envs && sudo installer -pkg ./wazuh-agent.pkg -target /
+curl -so wazuh-agent.pkg https://packages.wazuh.com/4.x/macos/wazuh-agent-4.14.5-1.intel64.pkg && echo "WAZUH_MANAGER='Addresse_IP' && WAZUH_AGENT_GROUP='default' && WAZUH_AGENT_NAME='Nom_agent'" > /tmp/wazuh_envs && sudo installer -pkg ./wazuh-agent.pkg -target /
 sudo /Library/Ossec/bin/wazuh-control start
 ```
 #### **Apple silicon**
 > Pareil que pour Intel, mais avec un paquet adapté aux Mac M1/M2.
 ####
 ```bash
-curl -so wazuh-agent.pkg https://packages.wazuh.com/4.x/macos/wazuh-agent-4.11.2-1.arm64.pkg && echo "WAZUH_MANAGER='Addresse_IP' && WAZUH_AGENT_GROUP='default' && WAZUH_AGENT_NAME='Nom_agent'" > /tmp/wazuh_envs && sudo installer -pkg ./wazuh-agent.pkg -target /
+curl -so wazuh-agent.pkg https://packages.wazuh.com/4.x/macos/wazuh-agent-4.14.5-1.arm64.pkg && echo "WAZUH_MANAGER='Addresse_IP' && WAZUH_AGENT_GROUP='default' && WAZUH_AGENT_NAME='Nom_agent'" > /tmp/wazuh_envs && sudo installer -pkg ./wazuh-agent.pkg -target /
 sudo /Library/Ossec/bin/wazuh-control start
 ```
 ---
@@ -115,9 +101,10 @@ sudo sed -i '/<directories>\/bin,\/sbin,\/boot<\/directories>/a \ <directories c
 ```
 ### **Détection des vulnérabilités**
 **Détection des vulnérabilités (Vulnerability detection)** est une fonction qui permet d’identifier les failles de sécurité connues dans les logiciels installés sur un système.
+> Depuis Wazuh 4.8, le module `<vulnerability-detector>` a été remplacé par `<vulnerability-detection>`. Il est activé par défaut et ne nécessite plus de blocs `<provider>` : le flux de vulnérabilités est géré via le Wazuh indexer.
 #### **Manager**
 ```bash
-sudo sed -i '/<\/ossec_config>/i \<vulnerability-detector>\n <enabled>yes</enabled>\n <provider name="canonical">\n <enabled>yes</enabled>\n </provider>\n</vulnerability-detector>' /var/ossec/etc/ossec.conf && sudo systemctl restart wazuh-manager
+sudo sed -i '/<vulnerability-detection>/,/<\/vulnerability-detection>/ s|<enabled>no</enabled>|<enabled>yes</enabled>|' /var/ossec/etc/ossec.conf && sudo systemctl restart wazuh-manager
 ```
 #### **Agent**
 > `auditd` est utilisé pour activer la journalisation des commandes.
@@ -136,23 +123,18 @@ sudo sed -i '/<\/ossec_config>/i \<active-response>\n <command>firewall-drop</co
 #### **Manager**
 ```bash
 sudo bash -c 'cat <<EOF >> /var/ossec/etc/rules/local_rules.xml
-
 <group name="local,custom">
-
 <rule id="100200" level="7">
 <if_sid>550</if_sid>
 <field name="file">/root</field>
 <description>File modified in /root directory.</description>
 </rule>
-
 <rule id="100201" level="7">
 <if_sid>554</if_sid>
 <field name="file">/root</field>
 <description>File added in /root directory.</description>
 </rule>
-
 </group>
-
 EOF'
 ```
 ```bash
@@ -173,13 +155,11 @@ biff = no
 append_dot_mydomain = no
 readme_directory = no
 compatibility_level = 3.6
-
 # Gmail SMTP relay
 relayhost = [smtp.gmail.com]:587
 smtp_use_tls = yes
 smtp_tls_security_level = encrypt
 smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
-
 # SASL auth
 smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
