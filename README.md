@@ -17,7 +17,7 @@ sudo apt install git -y
 ```
 #### Clonez le dépôt
 ```bash
-sudo git clone https://github.com/ettaldi/Wazuh
+sudo git clone https://github.com/0xV3x/Wazuh
 ```
 #### Entrez dans le répertoire
 ```bash
